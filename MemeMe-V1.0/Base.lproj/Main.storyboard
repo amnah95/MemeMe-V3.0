@@ -24,9 +24,17 @@
                                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i8b-Fj-9RK">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                                 <items>
-                                                    <barButtonItem title="Share" image="square.and.arrow.up" catalog="system" width="61" id="v2k-om-Z0h"/>
+                                                    <barButtonItem title="Share" image="square.and.arrow.up" catalog="system" width="61" id="v2k-om-Z0h">
+                                                        <connections>
+                                                            <action selector="shareMeme:" destination="BYZ-38-t0r" id="lI9-Lf-b3N"/>
+                                                        </connections>
+                                                    </barButtonItem>
                                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="WC5-jL-iEk"/>
-                                                    <barButtonItem systemItem="cancel" id="R7J-i9-MCk"/>
+                                                    <barButtonItem systemItem="cancel" id="R7J-i9-MCk">
+                                                        <connections>
+                                                            <action selector="cancelMeme:" destination="BYZ-38-t0r" id="Izo-iu-gDb"/>
+                                                        </connections>
+                                                    </barButtonItem>
                                                 </items>
                                             </toolbar>
                                         </subviews>
@@ -49,14 +57,14 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                                 <items>
                                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="JeY-vV-iXd"/>
-                                                    <barButtonItem image="camera.fill" catalog="system" width="185" id="5OY-PU-gY6">
+                                                    <barButtonItem image="camera.fill" catalog="system" width="185" id="5OY-PU-gY6" userLabel="New Image">
                                                         <connections>
-                                                            <action selector="pickAnImage:" destination="BYZ-38-t0r" id="J9j-bR-tJn"/>
+                                                            <action selector="takeNewImage:" destination="BYZ-38-t0r" id="uI8-Vy-VCu"/>
                                                         </connections>
                                                     </barButtonItem>
                                                     <barButtonItem title="Pick an Image" width="185" id="EDH-0P-urs">
                                                         <connections>
-                                                            <action selector="pickAnImage:" destination="BYZ-38-t0r" id="Ebm-av-UCa"/>
+                                                            <action selector="pickAnImage:" destination="BYZ-38-t0r" id="0q0-SQ-aj0"/>
                                                         </connections>
                                                     </barButtonItem>
                                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="UTP-eb-F2E"/>
