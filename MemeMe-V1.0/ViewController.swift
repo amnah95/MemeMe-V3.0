@@ -9,12 +9,28 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    // Variables and Outlets
+    @IBOutlet weak var imageViewPlaceHolder: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
-
+    // Prompts the user to pick an image from the photo album
+    @IBAction func pickAnImage(_ sender: Any) {
+        let imagePicker = UIImagePickerController()
+        //imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
+        
+    }
+    
+//    func imagePickerController(_:didFinishPickingMediaWithInfo:)
+//
+//
+//    func imagePickerControllerDidCancel(_:)
+        
+    
 }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,19 +12,21 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe_V1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3EM-E2-6wu">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="edg-db-WZF">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                         <subviews>
-                                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="i8b-Fj-9RK">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i8b-Fj-9RK">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                                 <items>
-                                                    <barButtonItem title="Item" id="v2k-om-Z0h"/>
+                                                    <barButtonItem title="Share" image="square.and.arrow.up" catalog="system" width="61" id="v2k-om-Z0h"/>
+                                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="WC5-jL-iEk"/>
+                                                    <barButtonItem systemItem="cancel" id="R7J-i9-MCk"/>
                                                 </items>
                                             </toolbar>
                                         </subviews>
@@ -33,15 +35,31 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="atA-Ih-ISI">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="579"/>
+                                        <rect key="frame" x="0.0" y="44" width="414" height="730"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o7B-JG-4AF">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="730"/>
+                                            </imageView>
+                                        </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUh-3O-Km6">
-                                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="774" width="414" height="44"/>
                                         <subviews>
-                                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="DoR-GB-Mqn">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DoR-GB-Mqn">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                                 <items>
-                                                    <barButtonItem title="Item" id="Rgq-uA-g90"/>
+                                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="JeY-vV-iXd"/>
+                                                    <barButtonItem image="camera.fill" catalog="system" width="185" id="5OY-PU-gY6">
+                                                        <connections>
+                                                            <action selector="pickAnImage:" destination="BYZ-38-t0r" id="J9j-bR-tJn"/>
+                                                        </connections>
+                                                    </barButtonItem>
+                                                    <barButtonItem title="Pick an Image" width="185" id="EDH-0P-urs">
+                                                        <connections>
+                                                            <action selector="pickAnImage:" destination="BYZ-38-t0r" id="Ebm-av-UCa"/>
+                                                        </connections>
+                                                    </barButtonItem>
+                                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="UTP-eb-F2E"/>
                                                 </items>
                                             </toolbar>
                                         </subviews>
@@ -71,10 +89,17 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="imageViewPlaceHolder" destination="o7B-JG-4AF" id="Joz-cQ-uue"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="109.82142857142857"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera.fill" catalog="system" width="128" height="96"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+    </resources>
 </document>
