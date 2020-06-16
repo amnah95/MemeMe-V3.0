@@ -57,9 +57,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // Subscribe to keyboared notification
         subscribeToKeyboardNotifications()
         
-        
 
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -102,37 +100,27 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let memedImage = generateMemedImage()
 
         let shareMemeViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        shareMemeViewController.completionWithItemsHandler = { activity, success, items, error in
-            if success {
-                self.saveMeme(memedImageReceived: memedImage)
-            }
-        }
-        
+        self.saveMeme(memedImageReceived: memedImage)
+
         // to present imgae picker controller
         present(shareMemeViewController, animated: true, completion: nil)
     }
-    
+        
     // to cancel meme created
     @IBAction func cancelMeme (_ sender: Any) {
         let cancelMemeAlretContorller = UIAlertController()
-        cancelMemeAlretContorller.title = "You are discarding current meme."
-        cancelMemeAlretContorller.message = "Sure you want to continue?"
+        cancelMemeAlretContorller.title = "You are discarding the current meme."
+        cancelMemeAlretContorller.message = "Do you want to continue?"
         
         // Sure action to continue with canceling
-        let sureAction = UIAlertAction(title: "Sure", style: UIAlertAction.Style.default) { action in self.imageViewPlaceHolder.image = nil
-            self.topText.text = "TOP"
-            self.bottomText.text = "BOTTOM"
-            self.topTextClearFlag = true
-            self.bottomTextClearFlag = true
-            self.shareButton.isEnabled = false
-            
+        let yesAction = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default) { action in self.dismiss(animated: true, completion: nil)
         }
         
         // No action button to stop canceling
         let noAction = UIAlertAction(title: "No", style: UIAlertAction.Style.default) { action in self.dismiss(animated: true, completion: nil)
         }
             // adding the two actions
-            cancelMemeAlretContorller.addAction(sureAction)
+            cancelMemeAlretContorller.addAction(yesAction)
             cancelMemeAlretContorller.addAction(noAction)
         // Presenting the alert view controller
         present(cancelMemeAlretContorller, animated: true, completion: nil)
@@ -262,7 +250,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
         appDelegate.memes.append(meme)
+        
+        print("image saved \(appDelegate.memes.isEmpty)")
+                
     }
+    
 
     
 }
