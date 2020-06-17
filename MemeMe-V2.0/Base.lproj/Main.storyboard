@@ -25,11 +25,11 @@
             </objects>
             <point key="canvasLocation" x="-3439" y="-14"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="FqR-0H-6Lo">
             <objects>
                 <navigationController id="Bgl-2j-HVc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="list.bullet" catalog="system" id="beE-LK-VeG"/>
+                    <tabBarItem key="tabBarItem" title="" image="list.bullet" catalog="system" id="beE-LK-VeG"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sZ7-eu-cmh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -231,11 +231,11 @@
             </objects>
             <point key="canvasLocation" x="-726" y="-567"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="BPl-Ct-MSg">
             <objects>
                 <navigationController id="mR0-fQ-48r" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="square.grid.2x2.fill" catalog="system" id="a1r-sn-sWZ"/>
+                    <tabBarItem key="tabBarItem" title="" image="square.grid.2x2.fill" catalog="system" id="a1r-sn-sWZ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Sf3-f1-Jzy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -270,7 +270,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="154"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="paQ-ZK-7OD">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="paQ-ZK-7OD">
                                             <rect key="frame" x="0.0" y="0.0" width="166" height="154"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
