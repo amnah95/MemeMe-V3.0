@@ -22,11 +22,13 @@ class sentMemesCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         
         let space: CGFloat = 3.0
-        let dimension = (view.frame.size.width - 2 * space ) / 3.0
+        let widthDimension = (view.frame.size.width - 2 * space ) / 3.0
+        let heightDimension = (view.frame.size.width - 2 * space ) / 5.0
+        
         
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
-        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
+        flowLayout.itemSize = CGSize(width: widthDimension, height: heightDimension)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: .add, style:.plain, target: self, action: #selector(createNewMeme))
       
@@ -62,7 +64,7 @@ class sentMemesCollectionViewController: UICollectionViewController {
         
         let meme = self.memes[(indexPath as NSIndexPath).row]
         
-        //cell.memeView?.image = meme.memedImage
+        cell.memeView?.image = meme.memedImage
         
         return cell
     }

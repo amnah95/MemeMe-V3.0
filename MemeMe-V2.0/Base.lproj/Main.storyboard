@@ -256,7 +256,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zs7-rH-GKJ">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zs7-rH-GKJ">
                             <size key="itemSize" width="166" height="154"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -273,14 +273,9 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="paQ-ZK-7OD">
                                             <rect key="frame" x="0.0" y="0.0" width="166" height="154"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="85" id="Wdz-8h-3t9"/>
-                                                <constraint firstAttribute="width" constant="85" id="wKD-3Z-HQP"/>
-                                            </constraints>
                                         </imageView>
                                     </subviews>
                                 </view>
-                                <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="customSize" width="166" height="154"/>
                                 <connections>
                                     <outlet property="memeView" destination="paQ-ZK-7OD" id="KJs-rd-MqT"/>
