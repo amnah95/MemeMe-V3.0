@@ -6,7 +6,6 @@
 //  Copyright © 2020 Udacity. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class sentMemesTableViewController: UITableViewController {
@@ -15,7 +14,7 @@ class sentMemesTableViewController: UITableViewController {
     
     // Computed variable of the saved memes
     var memes: [Meme]! {
-        return (UIApplication.shared.delegate as! AppDelegate).memes
+        return MemesLibrary.shared.memes
     }
     
     override func viewDidLoad() {
@@ -54,7 +53,7 @@ class sentMemesTableViewController: UITableViewController {
     // 2- Implement the cell population method
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: kTableViewCellID)!
         
         let meme = self.memes[(indexPath as NSIndexPath).row]
         

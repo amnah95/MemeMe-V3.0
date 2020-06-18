@@ -6,7 +6,6 @@
 //  Copyright © 2020 Udacity. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class sentMemesCollectionViewController: UICollectionViewController {
@@ -15,7 +14,7 @@ class sentMemesCollectionViewController: UICollectionViewController {
 
     // Computed variable of the saved memes
     var memes: [Meme]! {
-       return (UIApplication.shared.delegate as! AppDelegate).memes
+        return MemesLibrary.shared.memes
     }
     
     override func viewDidLoad() {
@@ -60,7 +59,7 @@ class sentMemesCollectionViewController: UICollectionViewController {
     // 2- Implement populating cells method
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! MemeCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kCollectionViewCellID, for: indexPath) as! MemeCollectionViewCell
         
         let meme = self.memes[(indexPath as NSIndexPath).row]
         

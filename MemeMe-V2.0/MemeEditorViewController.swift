@@ -100,7 +100,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let memedImage = generateMemedImage()
 
         let shareMemeViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        self.saveMeme(memedImageReceived: memedImage)
+        shareMemeViewController.completionWithItemsHandler = { activity, success, items, error in
+            if success {
+                self.saveMeme(memedImageReceived: memedImage)
+            }
+        }
 
         // to present imgae picker controller
         present(shareMemeViewController, animated: true, completion: nil)
@@ -247,12 +251,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let meme = Meme.init(topText: topText.text!, bottomText: bottomText.text!, originalImage: imageViewPlaceHolder.image!, memedImage: memedImageReceived)
         
         // Add it to the memes array in the Application Delegate
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        appDelegate.memes.append(meme)
-        
-        print("image saved \(appDelegate.memes.isEmpty)")
-                
+        MemesLibrary.shared.memes.append(meme)
     }
     
 
