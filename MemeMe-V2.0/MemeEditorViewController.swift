@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MemeEditorViewController.swift
 //  MemeMe-V1.0
 //
 //  Created by Amnah on 5/30/20.
@@ -100,9 +100,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let memedImage = generateMemedImage()
 
         let shareMemeViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        shareMemeViewController.completionWithItemsHandler = { activity, success, items, error in
-            if success {
+        
+        shareMemeViewController.completionWithItemsHandler = {
+            (_, completed, _, _) in
+            if completed {
                 self.saveMeme(memedImageReceived: memedImage)
+                self.dismiss(animated: true, completion: nil)
             }
         }
 
@@ -213,7 +216,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
 
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
-
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.cgRectValue.height
