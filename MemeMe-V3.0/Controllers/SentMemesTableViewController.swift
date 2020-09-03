@@ -9,9 +9,7 @@
 import UIKit
 
 class sentMemesTableViewController: UITableViewController {
-    
-    //var memes: [Meme] = []
-    
+        
     // Computed variable of the saved memes
     var memes: [Meme]! {
         return MemesLibrary.shared.memes
@@ -32,7 +30,7 @@ class sentMemesTableViewController: UITableViewController {
     
     // Presenting the meme editor controller
     @objc func createNewMeme () {
-        if let navigationController = navigationController {
+        if navigationController == navigationController {
             
             let memeViewController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
                   
@@ -47,8 +45,6 @@ class sentMemesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memes.count
     }
-    
-
     
     // 2- Implement the cell population method
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

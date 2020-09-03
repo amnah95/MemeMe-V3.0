@@ -94,7 +94,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
     }
     
-    
     // Prompts user to take new image
     @IBAction func shareMeme (_ sender: Any) {
         let memedImage = generateMemedImage()
@@ -102,7 +101,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let shareMemeViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         
         shareMemeViewController.completionWithItemsHandler = {
-            (_, completed, _, _) in
+            (activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
             if completed {
                 self.saveMeme(memedImageReceived: memedImage)
                 self.dismiss(animated: true, completion: nil)
@@ -112,6 +111,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // to present imgae picker controller
         present(shareMemeViewController, animated: true, completion: nil)
     }
+    
+    
         
     // to cancel meme created
     @IBAction func cancelMeme (_ sender: Any) {
