@@ -18,26 +18,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
-                       
-        // assign the data controller from AppDelegate
-        guard let dataController = (UIApplication.shared.delegate as? AppDelegate)?.dataController else {
-            fatalError("Unable to obtain dataController instance from AppDelegate")
-        }
-        
-
-        let tabBarViewController = window?.rootViewController as! UITabBarController
-                
-        // Passing data controller to Table view controller
-        var navigationController = tabBarViewController.viewControllers![0] as! UINavigationController
-        let memesTableViewController = navigationController.topViewController as! MemesTableViewController
-        memesTableViewController.dataController = dataController
-        
-        // Passing data controller to Collection view controller
-        navigationController = tabBarViewController.viewControllers![1] as! UINavigationController
-        let memesCollectionViewController = navigationController.topViewController as! MemesCollectionViewController
-        memesCollectionViewController.dataController = dataController
-        
-        
                
     }
 

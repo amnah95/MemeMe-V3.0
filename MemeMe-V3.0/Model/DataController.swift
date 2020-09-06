@@ -11,6 +11,8 @@ import CoreData
 
 
 class DataController {
+    
+    static let shared = DataController(modelName: "MemeMe-V3.0")
         
     // This will remain unchanged for the entire app
     let persistentContainer: NSPersistentContainer!

@@ -11,28 +11,26 @@ import CoreData
 
 class MemesTableViewController: UITableViewController {
         
-    
-    var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<UserMeme>!
 
         
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpNavBar()
+        
         tableView.delegate = self
         tableView.dataSource = self
         
         setupFetchResultsController()
-                
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: .add, style:.plain, target: self, action: #selector(createNewMeme))
+        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         setupFetchResultsController()
-
+        tableView.reloadData()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -41,28 +39,16 @@ class MemesTableViewController: UITableViewController {
         fetchedResultsController = nil
     }
     
-    // Presenting the meme editor controller
-    @objc func createNewMeme () {
-        if navigationController == navigationController {
-            
-            let memeEditorViewController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
-                  
-            memeEditorViewController.dataController = self.dataController
-            memeEditorViewController.modalPresentationStyle = .fullScreen
-            
-            
-            present(memeEditorViewController, animated: true, completion: nil)
-
-        }
-    }
 }
 
+
+// MARK: Table view controller data source
 extension MemesTableViewController {
     
-    // Impelement number of section method
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? 1
-    }
+//    // Impelement number of section method
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        return fetchedResultsController.sections?.count ?? 1
+//    }
     
     // Impelement number of rows method
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -92,8 +78,6 @@ extension MemesTableViewController {
         self.navigationController!.pushViewController(viewMemeController, animated: true)
         
     }
-    
-    
 }
     
     
@@ -112,7 +96,7 @@ extension MemesTableViewController: NSFetchedResultsControllerDelegate {
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         // Assign Fetch results controller
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "userMemes")
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: DataController.shared.viewContext, sectionNameKeyPath: nil, cacheName: "userMemes")
         
         // Set fectch controller delegate
         fetchedResultsController.delegate = self
@@ -153,3 +137,25 @@ extension MemesTableViewController: NSFetchedResultsControllerDelegate {
     }
 }
 
+
+//MARK: Helper methods
+extension MemesTableViewController{
+    
+    fileprivate func setUpNavBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: .add, style:.plain, target: self, action: #selector(createNewMeme))
+    }
+    
+    // Presenting the meme editor controller
+    @objc fileprivate func createNewMeme () {
+        if navigationController == navigationController {
+            
+            let memeEditorViewController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
+                  
+            memeEditorViewController.modalPresentationStyle = .fullScreen
+            
+            
+            present(memeEditorViewController, animated: true, completion: nil)
+
+        }
+    }
+}

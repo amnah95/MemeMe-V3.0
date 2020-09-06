@@ -21,7 +21,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var bottomToolbar: UIToolbar!
     @IBOutlet weak var imageViewPlaceHolder: UIImageView!
     
-    var dataController: DataController!
     var topTextClearFlag = true
     var bottomTextClearFlag = true
     
@@ -254,7 +253,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // Create the meme
         //let meme = Meme.init(topText: topText.text!, bottomText: bottomText.text!, originalImage: imageViewPlaceHolder.image!, memedImage: memedImageReceived)
         
-        let meme = UserMeme(context: dataController.viewContext)
+        let meme = UserMeme(context: DataController.shared.viewContext)
         meme.topText = topText.text
         meme.bottomText = bottomText.text
         meme.image = memedImageReceived.jpegData(compressionQuality: 1.0)
@@ -262,7 +261,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         do {
             print("New meme added to database")
-            try dataController.viewContext.save()
+            try DataController.shared.viewContext.save()
         } catch {
             print("New meme was NOT added to database")
         }
