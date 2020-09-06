@@ -1,8 +1,8 @@
 //
 //  MemeViewerController.swift
-//  MemeMe-V2.0
+//  MemeMe-V3.0
 //
-//  Created by Amnah on 6/10/20.
+//  Created by Amnah on 9/03/20.
 //  Copyright © 2020 Udacity. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 
 class MemeViewerController: UIViewController {
     
-    var memeToPresent: Meme!
+    var memeToPresent: UserMeme!
     
     @IBOutlet weak var memeViewer: UIImageView!
     
@@ -20,7 +20,7 @@ class MemeViewerController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.memeViewer.image = memeToPresent.memedImage
+        self.memeViewer.image = UIImage(data: memeToPresent.image!)
         self.tabBarController?.tabBar.isHidden = true
     }
     

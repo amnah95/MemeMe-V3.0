@@ -1,14 +1,16 @@
 //
-//  SentMemesCollectionViewController.swift
-//  MemeMe-V2.0
+//  MemesCollectionViewController.swift
+//  MemeMe-V3.0
 //
-//  Created by Amnah on 6/8/20.
+//  Created by Amnah on 9/03/20.
 //  Copyright © 2020 Udacity. All rights reserved.
 //
 
 import UIKit
 
-class sentMemesCollectionViewController: UICollectionViewController {
+class MemesCollectionViewController: UICollectionViewController {
+    
+    var dataController: DataController!
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
 
@@ -50,13 +52,19 @@ class sentMemesCollectionViewController: UICollectionViewController {
         }
         
     }
+
+}
+
+extension MemesCollectionViewController {
     
-    // 1- Implement the number of collection cells method
+    
+    
+    // Implement the number of collection cells method
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return memes.count
     }
     
-    // 2- Implement populating cells method
+    // Implement populating cells method
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kCollectionViewCellID, for: indexPath) as! MemeCollectionViewCell
@@ -68,14 +76,15 @@ class sentMemesCollectionViewController: UICollectionViewController {
         return cell
     }
     
-    //3- Clicking on a cell function
+    // Clicking on a cell function
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath:IndexPath) {
         
         let viewMemeController = self.storyboard!.instantiateViewController(withIdentifier: "MemeViewerController") as! MemeViewerController
                         
-        viewMemeController.memeToPresent = memes[(indexPath as NSIndexPath).row]
+        //viewMemeController.memeToPresent 
         
         self.navigationController!.pushViewController(viewMemeController, animated: true)
     }
 
+    
 }

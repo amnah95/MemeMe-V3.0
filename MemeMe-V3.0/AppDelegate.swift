@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  MemeMe-V1.0
+//  MemeMe-V3.0
 //
-//  Created by Amnah on 5/30/20.
+//  Created by Amnah on 9/03/20.
 //  Copyright © 2020 Udacity. All rights reserved.
 //
 
@@ -10,12 +10,15 @@ import UIKit
 
 @UIApplicationMain
 
-
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    let dataController = DataController(modelName: "MemeMe-V3.0")
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        dataController.load()
+        
         return true
     }
 

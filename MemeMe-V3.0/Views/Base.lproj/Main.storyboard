@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jnf-Ea-NCm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jnf-Ea-NCm">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -42,10 +42,10 @@
             </objects>
             <point key="canvasLocation" x="-2597" y="-567"/>
         </scene>
-        <!--Sent Memes Table View Controller-->
+        <!--Memes Table View Controller-->
         <scene sceneID="u3n-ab-hyn">
             <objects>
-                <tableViewController id="2Nh-Iv-n3R" customClass="sentMemesTableViewController" customModule="MemeMe_V3_0" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="2Nh-Iv-n3R" customClass="MemesTableViewController" customModule="MemeMe_V3_0" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="DAn-A5-7Jx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -248,10 +248,10 @@
             </objects>
             <point key="canvasLocation" x="-2597" y="293"/>
         </scene>
-        <!--Sent Memes Collection View Controller-->
+        <!--Memes Collection View Controller-->
         <scene sceneID="0tH-a2-6qm">
             <objects>
-                <collectionViewController id="D0E-5R-Tj3" customClass="sentMemesCollectionViewController" customModule="MemeMe_V3_0" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="D0E-5R-Tj3" customClass="MemesCollectionViewController" customModule="MemeMe_V3_0" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ble-x5-CGf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -289,7 +289,7 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="0Hk-42-EJt"/>
                     <connections>
-                        <outlet property="flowLayout" destination="zs7-rH-GKJ" id="nt1-ny-UWb"/>
+                        <outlet property="flowLayout" destination="zs7-rH-GKJ" id="gRS-Q2-meI"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CGI-mg-Mzs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

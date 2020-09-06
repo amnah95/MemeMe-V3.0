@@ -2,11 +2,12 @@
 //  MemeEditorViewController.swift
 //  MemeMe-V1.0
 //
-//  Created by Amnah on 5/30/20.
+//  Created by Amnah on 9/03/20.
 //  Copyright © 2020 Udacity. All rights reserved.
 //
 
 import UIKit
+import CoreData
 
 class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
@@ -20,7 +21,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var bottomToolbar: UIToolbar!
     @IBOutlet weak var imageViewPlaceHolder: UIImageView!
     
-    
+    var dataController: DataController!
     var topTextClearFlag = true
     var bottomTextClearFlag = true
     
@@ -251,10 +252,21 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // Impleminting Save meme function
     func saveMeme(memedImageReceived: UIImage) {
         // Create the meme
-        let meme = Meme.init(topText: topText.text!, bottomText: bottomText.text!, originalImage: imageViewPlaceHolder.image!, memedImage: memedImageReceived)
+        //let meme = Meme.init(topText: topText.text!, bottomText: bottomText.text!, originalImage: imageViewPlaceHolder.image!, memedImage: memedImageReceived)
         
-        // Add it to the memes array in the Application Delegate
-        MemesLibrary.shared.memes.append(meme)
+        let meme = UserMeme(context: dataController.viewContext)
+        meme.topText = topText.text
+        meme.bottomText = bottomText.text
+        meme.image = memedImageReceived.jpegData(compressionQuality: 1.0)
+        meme.creationDate = Date()
+        
+        do {
+            print("New meme added to database")
+            try dataController.viewContext.save()
+        } catch {
+            print("New meme was NOT added to database")
+        }
+
     }
     
 
