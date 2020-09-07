@@ -28,28 +28,20 @@ class MemesCollectionViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        collectionView.reloadData()
         setupFetchResultsController()
+        collectionView.reloadData()
 
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        // set fetched results controller to nil
-        fetchedResultsController = nil
-    }
+
 
 }
 
 extension MemesCollectionViewController {
-    
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return fetchedResultsController.sections?.count ?? 1
-    }
+
     
     // Implement the number of collection cells method
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        return fetchedResultsController.fetchedObjects?.count ?? 0
     }
     
     // Implement populating cells method

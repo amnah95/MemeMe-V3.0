@@ -33,11 +33,6 @@ class MemesTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        // set fetched results controller to nil
-        fetchedResultsController = nil
-    }
     
 }
 
@@ -45,14 +40,9 @@ class MemesTableViewController: UITableViewController {
 // MARK: Table view controller data source
 extension MemesTableViewController {
     
-//    // Impelement number of section method
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        return fetchedResultsController.sections?.count ?? 1
-//    }
-    
     // Impelement number of rows method
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        return fetchedResultsController.fetchedObjects?.count ?? 0
     }
     
     // Implement the cell population method
