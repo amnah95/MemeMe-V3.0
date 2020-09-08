@@ -12,16 +12,13 @@ import CoreData
 class MemesCollectionViewController: UICollectionViewController {
     
     var fetchedResultsController: NSFetchedResultsController<UserMeme>!
-
-    
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpNavBar()
-        setUpCollectionViewFlow()
+        setUpCollectionViewFlow(flowLayout: self.flowLayout, view: view)
         setupFetchResultsController()
               
     }
@@ -33,12 +30,11 @@ class MemesCollectionViewController: UICollectionViewController {
 
     }
 
-
 }
 
-extension MemesCollectionViewController {
 
-    
+// MARK: Collection View data source functions
+extension MemesCollectionViewController {
     // Implement the number of collection cells method
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return fetchedResultsController.fetchedObjects?.count ?? 0
@@ -68,6 +64,8 @@ extension MemesCollectionViewController {
 }
 
 
+
+// MARK: Fetch meme from database
 extension MemesCollectionViewController: NSFetchedResultsControllerDelegate {
     
     // Loading exsiting data in data base
@@ -117,38 +115,3 @@ extension MemesCollectionViewController: NSFetchedResultsControllerDelegate {
     
 }
 
-//MARK: Helper methods
-extension MemesCollectionViewController {
-    
-    fileprivate func setUpNavBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: .add, style:.plain, target: self, action: #selector(createNewMeme))
-    }
-    
-    // Presenting the meme editor controller
-    @objc fileprivate func createNewMeme () {
-        if navigationController == navigationController {
-            
-            let memeEditorViewController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
-                  
-            memeEditorViewController.modalPresentationStyle = .fullScreen
-            
-            
-            present(memeEditorViewController, animated: true, completion: nil)
-
-        }
-    }
-    
-    fileprivate func setUpCollectionViewFlow() {
-        let space: CGFloat = 3.0
-        let widthDimension = (view.frame.size.width - 2 * space ) / 3.0
-        let heightDimension = (view.frame.size.width - 2 * space ) / 5.0
-        
-        
-        flowLayout.minimumInteritemSpacing = space
-        flowLayout.minimumLineSpacing = space
-        flowLayout.itemSize = CGSize(width: widthDimension, height: heightDimension)
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
-    }
-}

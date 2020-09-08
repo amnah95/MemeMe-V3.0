@@ -6,10 +6,11 @@
 //  Copyright © 2020 Udacity. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import CoreData
 
-class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: UIViewController, UINavigationControllerDelegate, receiveData {
     
     
     // Variables and Outlets
@@ -31,10 +32,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         NSAttributedString.Key.strokeWidth : NSNumber(value: -3.0 as Float)
     ]
 
-    //
-    // Overriding UIView Class methods
-    //
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,8 +53,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         // Subscribe to keyboared notification
         subscribeToKeyboardNotifications()
-        
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -65,15 +60,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         // Unubscribe from keyboared notification
         unsubscribeFromKeyboardNotifications()
+        
     }
     
-    // Implementing attributes function
-    func setTextAttribute(_ textField : UITextField, text : String) {
-        textField.text = text
-        textField.defaultTextAttributes = memeTextAttributes
-        textField.textAlignment = .center
-        textField.delegate = self
+    // Conform to protocol
+    func passData(meme: UIImage) {
+        self.imageViewPlaceHolder.image = meme
+        self.shareButton.isEnabled = true
     }
+
     
     //
     // Implementing all buttons' actions
@@ -81,18 +76,31 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // Prompts user to take new image
     @IBAction func imagePick(_ sender: UIButton) {
+        
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
+        
         if sender == cameraButton {
             imagePicker.sourceType = .camera
         }
+        
         else {
         imagePicker.sourceType = .photoLibrary
         }
         
         present(imagePicker, animated: true, completion: nil)
-        
     }
+    
+    // Prompts user to search new meme form network
+    @IBAction func searchNewMeme(_ sender: Any) {
+                
+        let searchMemeViewController = self.storyboard!.instantiateViewController(withIdentifier: "NewtorkMemesCollectionViewController") as! NetworkMemesCollectionViewController
+        
+        searchMemeViewController.delegate = self
+        
+        present(searchMemeViewController, animated: true, completion: nil)
+    }
+    
     
     // Prompts user to take new image
     @IBAction func shareMeme (_ sender: Any) {
@@ -135,9 +143,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     
-    //
-    // Implementing delegates functions
-    //
+}
+
+// MARL: ImagePicker methods
+extension MemeEditorViewController: UIImagePickerControllerDelegate {
     
     // implementing the image picker delegagte didFinishPickingMediaWithInfo function
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -152,10 +161,69 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
+
+}
+
+// MARK: Meme generating and saving methods
+extension MemeEditorViewController {
+    
+    // Implemeniting saving meme method
+    func generateMemedImage() -> UIImage {
+
+        //Hide toolbar and navbar
+        toggleToolbar(toolbars: [topToolbar, bottomToolbar])
+
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        //Show toolbar and navbar
+        toggleToolbar(toolbars: [topToolbar, bottomToolbar])
+
+        return memedImage
+    }
+    
+    // Hide/Unhide method
+    func toggleToolbar (toolbars: [UIToolbar]) {
+        toolbars.forEach { toolbar in
+        toolbar.isHidden = !toolbar.isHidden
+        }
+    }
+    
+    // Impleminting Save meme function
+    func saveMeme(memedImageReceived: UIImage) {
+        
+        let meme = UserMeme(context: DataController.shared.viewContext)
+        meme.topText = topText.text
+        meme.bottomText = bottomText.text
+        meme.image = memedImageReceived.jpegData(compressionQuality: 1.0)
+        meme.creationDate = Date()
+        
+        do {
+            print("New meme added to database")
+            try DataController.shared.viewContext.save()
+        } catch {
+            print("New meme was NOT added to database")
+        }
+    }
+}
+
+
+// MARK: Text feild delegates
+extension MemeEditorViewController: UITextFieldDelegate {
+    
+    // Implementing attributes function
+    func setTextAttribute(_ textField : UITextField, text : String) {
+        textField.text = text
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = .center
+        textField.delegate = self
+    }
     
     // implementing the text field delegagte textFieldDidBeginEditing function
     func textFieldDidBeginEditing(_ textField: UITextField) {
-            
         
         if  self.topTextClearFlag == true && textField == self.topText {
             self.topText.text = ""
@@ -172,22 +240,18 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         
         if  textField.text == "" && textField == self.topText {
             self.topText.text = "TOP"
-            
         }
         if  textField.text == "" && textField == self.bottomText {
             self.bottomText.text = "BOTTOM"
-            
         }
-        
         textField.resignFirstResponder()
-        
         return true
     }
-    
-    //
-    // Implementing notifications methods
-    //
-    
+}
+
+
+// MARK: Keyboread notification methods
+extension MemeEditorViewController {
     
     // Implementing keyboard notifications subscribe/unsubscribe methods
     func subscribeToKeyboardNotifications() {
@@ -221,53 +285,5 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.cgRectValue.height
     }
-    
-    
-    // Implemeniting saving meme method
-    func generateMemedImage() -> UIImage {
-
-        //Hide toolbar and navbar
-        toggleToolbar(toolbars: [topToolbar, bottomToolbar])
-
-        // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
-        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-
-        //Show toolbar and navbar
-        toggleToolbar(toolbars: [topToolbar, bottomToolbar])
-
-        return memedImage
-    }
-    
-    // Hide/Unhide method
-    func toggleToolbar (toolbars: [UIToolbar]) {
-        toolbars.forEach { toolbar in
-        toolbar.isHidden = !toolbar.isHidden
-        }
-    }
-    
-    // Impleminting Save meme function
-    func saveMeme(memedImageReceived: UIImage) {
-        // Create the meme
-        //let meme = Meme.init(topText: topText.text!, bottomText: bottomText.text!, originalImage: imageViewPlaceHolder.image!, memedImage: memedImageReceived)
-        
-        let meme = UserMeme(context: DataController.shared.viewContext)
-        meme.topText = topText.text
-        meme.bottomText = bottomText.text
-        meme.image = memedImageReceived.jpegData(compressionQuality: 1.0)
-        meme.creationDate = Date()
-        
-        do {
-            print("New meme added to database")
-            try DataController.shared.viewContext.save()
-        } catch {
-            print("New meme was NOT added to database")
-        }
-
-    }
-    
-
     
 }

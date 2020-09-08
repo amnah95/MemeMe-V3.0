@@ -6,6 +6,7 @@
 //  Copyright © 2020 Udacity. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import CoreData
 
@@ -13,7 +14,7 @@ class MemesTableViewController: UITableViewController {
         
     var fetchedResultsController: NSFetchedResultsController<UserMeme>!
 
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,7 +24,6 @@ class MemesTableViewController: UITableViewController {
         tableView.dataSource = self
         
         setupFetchResultsController()
-        
     }
     
     
@@ -32,8 +32,6 @@ class MemesTableViewController: UITableViewController {
         setupFetchResultsController()
         tableView.reloadData()
     }
-
-    
 }
 
 
@@ -54,7 +52,7 @@ extension MemesTableViewController {
                 
         cell.textLabel?.text = aUserMeme.topText! + " ... " + aUserMeme.bottomText!
         cell.imageView?.image = UIImage(data: aUserMeme.image!)
-                
+        cell.imageView?.transform = CGAffineTransform(scaleX: 65, y: 65)
         return cell
     }
     
@@ -128,24 +126,3 @@ extension MemesTableViewController: NSFetchedResultsControllerDelegate {
 }
 
 
-//MARK: Helper methods
-extension MemesTableViewController{
-    
-    fileprivate func setUpNavBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: .add, style:.plain, target: self, action: #selector(createNewMeme))
-    }
-    
-    // Presenting the meme editor controller
-    @objc fileprivate func createNewMeme () {
-        if navigationController == navigationController {
-            
-            let memeEditorViewController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditorViewController") as! MemeEditorViewController
-                  
-            memeEditorViewController.modalPresentationStyle = .fullScreen
-            
-            
-            present(memeEditorViewController, animated: true, completion: nil)
-
-        }
-    }
-}

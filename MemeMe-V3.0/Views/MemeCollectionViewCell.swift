@@ -11,6 +11,9 @@ import UIKit
 class MemeCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var memeView : UIImageView!
-
-
+    @IBOutlet weak var photoLoadingIndicator: UIActivityIndicatorView!
+    
+    override func prepareForReuse() {
+        photoLoadingIndicator.startAnimating()
+    }
 }
